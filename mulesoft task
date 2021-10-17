@@ -1,0 +1,311 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%load_ext sql"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%sql sqlite:///data/movies.db3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Done.\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "[]"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "%%sql sqlite://\n",
+    "CREATE TABLE Movie(\n",
+    "    Movie Name VARCHAR(50) NOT NULL,\n",
+    "    actor VARCHAR(50) NOT NULL, \n",
+    "    director Name VARCHAR(50) NOT NULL,\n",
+    "    actress VARCHAR(50) NOT NULL,\n",
+    "    year int(4) NOT NULL,\n",
+    "    USERID int  NOT NULL UNIQUE, \n",
+    "    PRIMARY KEY (USERID)\n",
+    ");"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1 rows affected.\n",
+      "1 rows affected.\n",
+      "1 rows affected.\n",
+      "1 rows affected.\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "[]"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "%%sql sqlite://\n",
+    "INSERT INTO Movie VALUES ('Sparsha', 'SUDEEP','SunilKumarDesai', 'Rekha',2000,1 );\n",
+    "INSERT INTO Movie VALUES ('Prathyartha', 'SUDEEP','Sunil Kumar Desai', 'Rekha',1999,2);\n",
+    "INSERT INTO Movie VALUES ('Vaalee', 'SUDEEP','Mahendar', 'sinchana',2002,3);\n",
+    "INSERT INTO Movie VALUES ('Yada Yada Hi Dharmasya', 'vijay','Viraj', 'shava',2019,4);"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " * sqlite://\n",
+      "Done.\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<table>\n",
+       "    <tr>\n",
+       "        <th>Movie</th>\n",
+       "        <th>actor</th>\n",
+       "        <th>director</th>\n",
+       "        <th>actress</th>\n",
+       "        <th>year</th>\n",
+       "        <th>USERID</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Sparsha</td>\n",
+       "        <td>SUDEEP</td>\n",
+       "        <td>SunilKumarDesai</td>\n",
+       "        <td>Rekha</td>\n",
+       "        <td>2000</td>\n",
+       "        <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Prathyartha</td>\n",
+       "        <td>SUDEEP</td>\n",
+       "        <td>Sunil Kumar Desai</td>\n",
+       "        <td>Rekha</td>\n",
+       "        <td>1999</td>\n",
+       "        <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Vaalee</td>\n",
+       "        <td>SUDEEP</td>\n",
+       "        <td>Mahendar</td>\n",
+       "        <td>sinchana</td>\n",
+       "        <td>2002</td>\n",
+       "        <td>3</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Yada Yada Hi Dharmasya</td>\n",
+       "        <td>vijay</td>\n",
+       "        <td>Viraj</td>\n",
+       "        <td>shava</td>\n",
+       "        <td>2019</td>\n",
+       "        <td>4</td>\n",
+       "    </tr>\n",
+       "</table>"
+      ],
+      "text/plain": [
+       "[('Sparsha', 'SUDEEP', 'SunilKumarDesai', 'Rekha', 2000, 1),\n",
+       " ('Prathyartha', 'SUDEEP', 'Sunil Kumar Desai', 'Rekha', 1999, 2),\n",
+       " ('Vaalee', 'SUDEEP', 'Mahendar', 'sinchana', 2002, 3),\n",
+       " ('Yada Yada Hi Dharmasya', 'vijay', 'Viraj', 'shava', 2019, 4)]"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "sqlres = %sql SELECT * from Movie\n",
+    "sqlres"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " * sqlite://\n",
+      "Done.\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<table>\n",
+       "    <tr>\n",
+       "        <th>Movie</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Sparsha</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Prathyartha</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Vaalee</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Yada Yada Hi Dharmasya</td>\n",
+       "    </tr>\n",
+       "</table>"
+      ],
+      "text/plain": [
+       "[('Sparsha',), ('Prathyartha',), ('Vaalee',), ('Yada Yada Hi Dharmasya',)]"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "sqlres = %sql SELECT movie from Movie\n",
+    "sqlres"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " * sqlite://\n",
+      "Done.\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<table>\n",
+       "    <tr>\n",
+       "        <th>Movie</th>\n",
+       "        <th>actor</th>\n",
+       "        <th>director</th>\n",
+       "        <th>actress</th>\n",
+       "        <th>year</th>\n",
+       "        <th>USERID</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Sparsha</td>\n",
+       "        <td>SUDEEP</td>\n",
+       "        <td>SunilKumarDesai</td>\n",
+       "        <td>Rekha</td>\n",
+       "        <td>2000</td>\n",
+       "        <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Prathyartha</td>\n",
+       "        <td>SUDEEP</td>\n",
+       "        <td>Sunil Kumar Desai</td>\n",
+       "        <td>Rekha</td>\n",
+       "        <td>1999</td>\n",
+       "        <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "        <td>Vaalee</td>\n",
+       "        <td>SUDEEP</td>\n",
+       "        <td>Mahendar</td>\n",
+       "        <td>sinchana</td>\n",
+       "        <td>2002</td>\n",
+       "        <td>3</td>\n",
+       "    </tr>\n",
+       "</table>"
+      ],
+      "text/plain": [
+       "[('Sparsha', 'SUDEEP', 'SunilKumarDesai', 'Rekha', 2000, 1),\n",
+       " ('Prathyartha', 'SUDEEP', 'Sunil Kumar Desai', 'Rekha', 1999, 2),\n",
+       " ('Vaalee', 'SUDEEP', 'Mahendar', 'sinchana', 2002, 3)]"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "%sql select * from movie where actor='SUDEEP'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "anaconda-cloud": {},
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
